@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NexiaGames - <?= $page->title ?></title>
+    <link rel="stylesheet" type="text/css" href="<?= $params['css'] ?> " id="style">
+    <link rel="stylesheet" type="text/css" href="/inc/css/animate.css">
+    <base href="<?= Config::$config['base'] ?>">
+</head>
+<body>
+<div id="page-container">
+    <!-- Header -->
+    <div class="hx-head">
+        <div id="navigation">
+            <div class="pageContent">
+                <nav>
+                    <div class="navTabs pageWidth">
+                        <div class="header-logo">
+                            <a href="https://www.nexiagames.com">
+                                <img src="./inc/img/logo.png">
+                            </a>
+                        </div>
+                        <div class="navigation-responsive-toggle">
+                            <i class="fa fa-bars"></i>
+                        </div>
+                        <div class="navigation-responsive">
+                            <li class="navTab login PopupClosed">
+                                <label for="LoginControl">
+                                    <a href="/forum/login/" class="navLink OverlayTrigger login">
+                                        Connexion
+                                    </a>
+                                </label>
+                            </li>
+                            <li class="navTab login PopupClosed">
+                                <label for="LoginControl">
+                                    <a href="/forum/register/" class="navLink signup">
+                                        Inscription
+                                    </a>
+                                </label>
+                            </li>
+                            <ul class="publicTabs">
+                                <li class="navTab forum"><a href="/forum" class="navLink">FORUM</a></li>
+                                <li class="navTab forum"><a href="//https://stats.nexiagames.com"
+                                                            class="navLink">STATS</a></li>
+                                <li class="navTab forum"><a href="//https://bug.nexiagame.com" target="_blank"
+                                                            class="navLink">BUG</a></li>
+                                <li class="navTab forum">
+                                    <div class="store-link-border"><img class="store-link-coin"
+                                                                        src="./inc/img/boutique.png"></div>
+                                    <a href="https://store.nexiagames.com" class="navLink store-link">Boutique</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="helper"></span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="hx-header">
+        <div class="bg"></div>
+        <div class="bgmask"></div>
+        <div class="pageWidth">
+            <div class="block left">
+                <div class="info">
+                    <div class="head">PLAY.NEXIAGAMES.COM</div>
+                    <div class="subhead"><span id="players-logged"></span> joueurs connectés</div>
+                </div>
+            </div>
+            <div class="logo animated zoomIn fadeIn">
+                <div class="animated zoomIn fadeIn"></div>
+                <img src="./inc/img/logo.png" alt="">
+            </div>
+            <div class="block right">
+            </div>
+        </div>
+    </div>
+    <div class="hx-helper"></div>
+    <div id="content" class="content">
+        <div class="pageWidth home">
+            <div class="mainContainer">
+                <div class="first-news">
+                    <?php $lastArc = Database::fetch(Database::query("SELECT * FROM article ORDER BY id DESC LIMIT 1"));
+
+                    echo '<a href="' . $lastArc->redir . '" class="first" style="background-image: url(' . $lastArc->bg . ');">';
+                    echo '<b>' . $lastArc->name . '</b>';
+                    echo '<span>' . $lastArc->type . '</span>';
+                    echo '</a>';
+
+                    ?>
+
+
+                </div>
+                <div class="stats-m">
+                    <h2 class="title">Statistiques</h2>
+                    <div class="stats-item">
+                        <div class="value">31 029</div>
+                        <div class="name">Joueurs inscrits</div>
+                        <div class="sub">depuis l'ouverture du serveur</div>
+                    </div>
+                    <div class="stats-item">
+                        <div class="value">10 439</div>
+                        <div class="name">Followers</div>
+                        <div class="sub">sur les réseaux sociaux</div>
+                    </div>
+                    <div class="stats-item-solo">
+                        <div class="value">1 353 534</div>
+                        <div class="name">Messages</div>
+                        <div class="sub">sur le forum</div>
+                    </div>
+                </div>
+                <h1 class="d-activ">DERNIÈRES ACTUALITÉS :</h1>
+                <div class="sub-news">
+                    <?php
+                    $i = 0;
+                    $last11Arc = Database::fetchAll(Database::query("SELECT * FROM article ORDER BY id DESC LIMIT 9"));
+                    foreach ($last11Arc as $arc) {
+                        if ($i == 0) {
+                            $i++;
+                        } else {
+                            echo '<div class="new">';
+                            echo '<a href="' . $arc->redir . '" class="snews">';
+                            echo '<b>' . $arc->name . '</b>';
+                            echo '<img src="' . $arc->bg . '"/>';
+                            echo '<span>' . $arc->type . '</span>';
+                            echo '</a>';
+                            echo '</div>';
+                        }
+                    }
+                    ?>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <footer>
+        <div class="footer">
+            <div class="box">
+                <div class="container">
+                    <div class="footer-item">
+                        <div class="logo"></div>
+                    </div>
+                    <div class="footer-item-tc">
+                        <a href="">Conditions generales de vente </a><br>
+                        <a href="">Reglement</a><br>
+                        <a href="">Recrutement</a><br>
+                        <br>
+                        <b style="color: whitesmoke;">COPYRIGHT </b><b style="font-family: Arial;color: whitesmoke;">©</b><b style="color: whitesmoke;"> NexiaGames. Tous droites reserves.</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
